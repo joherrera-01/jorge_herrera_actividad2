@@ -1,0 +1,10 @@
+/* ... CSS anterior + MVC específico */
+.btn-edit { background: #48bb78; color: white; padding: 5px 10px; border-radius: 3px; margin-right: 5px; }
+.btn-delete { background: #f56565; color: white; padding: 5px 10px; border-radius: 3px; margin-right: 5px; }
+.btn-sell { background: #ed8936; color: white; padding: 5px 10px; border-radius: 3px; }
+.low-stock { color: #e53e3e; font-weight: bold; }
+.required { color: #e53e3e; }
+.form-group { margin-bottom: 20px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+footer { text-align: center; padding: 20px; color: #666; background: white; margin-top: 40px; border-radius: 10px 10px 0 0; }
+

@@ -2,17 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema MVC - Jorge Herrera ECOTEC</title>
+    <title>Sistema MVC - Jorge Herrera</title>
     <link rel="stylesheet" href="/jorge_herrera_actividad2/assets/css/style.css">
 </head>
 <body>
 <header>
+    <h1>🏗️ MVC - Inventario + Ventas</h1>
     <nav class="menu">
         <a href="?c=productos&a=index">📋 Productos</a>
-        <a href="?c=productos&a=create">➕ Nuevo</a>
+        <?php
+        $modulo = $_GET['c'] ?? 'productos';
+        echo ($modulo == 'ventas') ? '<a href="?c=productos&a=index">🛒 Ir a Productos</a>' : '<a href="?c=productos&a=create">➕ Nuevo</a>';
+        ?>
         <a href="?c=ventas&a=index">💰 Ventas</a>
     </nav>
-    <h1>🏗️ MVC Completo - Inventario + Ventas</h1>
 </header>
-<main class="container">
+<div class="container"> <!-- ABRIMOS EL CONTENEDOR AQUÍ -->

@@ -7,8 +7,11 @@ class Producto {
     }
 
     public function all() {
-        $stmt = $this->pdo->query("SELECT * FROM productos ORDER BY id DESC");
-        return $stmt->fetchAll();
+    $stmt = $this->pdo->query("SELECT p.*, c.nombre as categoria_nombre 
+                               FROM productos p 
+                               LEFT JOIN categorias c ON p.categoria_id = c.id 
+                               ORDER BY p.id DESC");
+    return $stmt->fetchAll();
     }
 
     public function find($id) {

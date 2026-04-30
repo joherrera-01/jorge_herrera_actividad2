@@ -1,7 +1,7 @@
     <script src="../assets/js/app.js"></script>
 </main>
 <footer>
-    <p>&copy; 2026 Jorge Herrera Galan - ECOTEC | MVC PHP puro</p>
+    <p>&copy; 2026 Jorge Herrera Galan - ECOTEC | MVC Con PHP</p>
 </footer>
 </body>
 </html>

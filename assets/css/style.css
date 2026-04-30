@@ -1,10 +1,46 @@
-/* ... CSS anterior + MVC específico */
-.btn-edit { background: #48bb78; color: white; padding: 5px 10px; border-radius: 3px; margin-right: 5px; }
-.btn-delete { background: #f56565; color: white; padding: 5px 10px; border-radius: 3px; margin-right: 5px; }
-.btn-sell { background: #ed8936; color: white; padding: 5px 10px; border-radius: 3px; }
-.low-stock { color: #e53e3e; font-weight: bold; }
-.required { color: #e53e3e; }
-.form-group { margin-bottom: 20px; }
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-footer { text-align: center; padding: 20px; color: #666; background: white; margin-top: 40px; border-radius: 10px 10px 0 0; }
+/* 1. Reset básico y Tipografía */
+* { box-sizing: border-box; }
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f4f7f6; 
+    margin: 0; 
+    padding: 0; 
+    color: #333; 
+}
 
+/* 2. Layout y Menú */
+header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+.menu { background: #34495e; padding: 10px; display: flex; justify-content: center; gap: 20px; }
+.menu a { color: white; text-decoration: none; font-weight: bold; padding: 10px; transition: 0.3s; }
+.menu a:hover { background: #1abc9c; border-radius: 5px; }
+
+/* 3. Contenedor principal */
+.container { width: 90%; max-width: 1000px; margin: 30px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+/* 4. Tabla profesional */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+th { background-color: #34495e; color: white; }
+tr:hover { background-color: #f1f1f1; }
+
+/* 5. Botones y Acciones */
+.btn-edit, .btn-delete, .btn-sell { 
+    padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9em; display: inline-block; 
+}
+.btn-edit { background: #3498db; color: white; }
+.btn-delete { background: #e74c3c; color: white; }
+.btn-sell { background: #27ae60; color: white; }
+.btn-edit:hover, .btn-delete:hover, .btn-sell:hover { opacity: 0.8; }
+
+/* 6. Utilidades */
+.success { background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+.error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+.low-stock { color: #e74c3c; font-weight: bold; }
+.form-group { margin-bottom: 15px; }
+input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+button { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+
+/* 7. Responsivo */
+@media (max-width: 600px) {
+    .menu { flex-direction: column; align-items: center; }
+}

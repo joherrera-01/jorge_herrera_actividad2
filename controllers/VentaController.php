@@ -1,7 +1,15 @@
 <?php
-// Este controlador servirá de puente en futuros módulos.
-// Por ahora, la lógica de persistencia reside en el cliente (JS).
+// Se incluye el modelo correspondiente
+require_once '../models/Venta.php';
+
 class VentaController {
-    public function listar() { /* Lógica futura para DB */ }
+    
+    // Función para cargar la interfaz de ventas
+    public function index() {
+        // El controlador decide qué vista mostrar
+        include '../public/ventas.php';
+    }
+
+    // En el futuro, aquí se procesarán los reportes de ventas
 }
 ?>

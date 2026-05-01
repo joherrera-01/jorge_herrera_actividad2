@@ -11,13 +11,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="index.php">Sistema Inventario</a>
+        <a class="navbar-brand" href="/jorge_herrera_actividad2/index.php">Sistema Inventario</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="productos.php">Productos</a></li>
                 <li class="nav-item"><a class="nav-link active" href="ventas.php">Ventas</a></li>
             </ul>
-            <a href="index.php" class="btn btn-outline-danger btn-sm">Salir al Menú</a>
+            <a href="/jorge_herrera_actividad2/index.php" class="btn btn-outline-danger btn-sm">Salir al Menú</a>
         </div>
     </div>
 </nav>

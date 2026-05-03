@@ -132,3 +132,25 @@ function eliminarVenta(i) {
         renderVentas();
     }
 }
+function mostrarMensaje(mensaje, tipo = 'success') {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    const wrapper = document.createElement('div');
+    
+    // Icono según el tipo
+    const icono = tipo === 'success' ? 'bi-check-circle' : (tipo === 'danger' ? 'bi-trash' : 'bi-info-circle');
+
+    wrapper.innerHTML = [
+        `<div class="alert alert-${tipo} alert-dismissible fade show shadow-lg" role="alert">`,
+        `   <div><i class="bi ${icono} me-2"></i>${mensaje}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('');
+
+    alertPlaceholder.append(wrapper);
+
+    // Auto-eliminar el mensaje después de 3 segundos
+    setTimeout(() => {
+        const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
+        alert.close();
+    }, 3000);
+}

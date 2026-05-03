@@ -1,8 +1,35 @@
-// Servicio de datos (Simulando capa de persistencia)
+// Servicio de datos
 const ProductoService = {
     get: () => JSON.parse(localStorage.getItem('productos')) || [],
     save: (data) => localStorage.setItem('productos', JSON.stringify(data))
 };
+
+// --- NUEVA FUNCIÓN DE ALERTAS ---
+function mostrarMensaje(mensaje, tipo = 'success') {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    if (!alertPlaceholder) return;
+
+    const wrapper = document.createElement('div');
+    const icono = tipo === 'success' ? 'bi-check-circle' : (tipo === 'danger' ? 'bi-trash' : 'bi-info-circle');
+
+    wrapper.innerHTML = [
+        `<div class="alert alert-${tipo} alert-dismissible fade show shadow-lg" role="alert" style="border-left: 5px solid;">`,
+        `   <div><i class="bi ${icono} me-2"></i>${mensaje}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('');
+
+    alertPlaceholder.append(wrapper);
+
+    // Auto-eliminar después de 3 segundos
+    setTimeout(() => {
+        const alertElement = wrapper.querySelector('.alert');
+        if (alertElement) {
+            const bsAlert = new bootstrap.Alert(alertElement);
+            bsAlert.close();
+        }
+    }, 3000);
+}
 
 // Función para mostrar los productos en la tabla
 function renderProductos() {
@@ -18,10 +45,14 @@ function renderProductos() {
                 <td>$${parseFloat(p.precio).toFixed(2)}</td>
                 <td>${p.stock}</td>
                 <td class="text-center">
-                    <button class="btn btn-warning btn-sm text-white" onclick="prepararEdicion(${i})">
+                    <button class="btn btn-warning btn-sm text-white me-1" 
+                            onclick="prepararEdicion(${i})" 
+                            data-tooltip="Editar Producto">
                         <i class="bi bi-pencil"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${i})">
+                    <button class="btn btn-danger btn-sm" 
+                            onclick="eliminarProducto(${i})" 
+                            data-tooltip="Eliminar Producto">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
@@ -31,7 +62,7 @@ function renderProductos() {
 
 // Función para Guardar o Actualizar
 function guardarProducto(e) {
-    e.preventDefault(); // Evita que la página se recargue
+    e.preventDefault();
     
     let prods = ProductoService.get();
     const nombre = document.getElementById('nombre').value.trim();
@@ -39,7 +70,6 @@ function guardarProducto(e) {
     const stock = parseInt(document.getElementById('stock').value);
     const editIdx = document.getElementById('editIndex').value;
 
-    // Validaciones obligatorias del Módulo 1
     if (!nombre) return alert("El nombre es obligatorio");
     if (precio <= 0) return alert("El precio debe ser mayor a 0");
     if (stock < 0) return alert("El stock no puede ser negativo");
@@ -47,19 +77,21 @@ function guardarProducto(e) {
     const p = { nombre, precio, stock };
 
     if (editIdx === "") {
-        // Nuevo producto
+        // NUEVO PRODUCTO
         prods.push(p);
+        mostrarMensaje("¡Producto guardado exitosamente!"); 
     } else {
-        // Editar producto existente
+        // EDITAR PRODUCTO
         prods[editIdx] = p;
         document.getElementById('editIndex').value = "";
         document.getElementById('btnOk').innerText = "Guardar";
         document.getElementById('btnOk').className = "btn btn-primary w-100";
+        mostrarMensaje("Producto actualizado correctamente", "info");
     }
 
-    ProductoService.save(prods); // Guardar en LocalStorage
-    e.target.reset(); // Limpiar formulario
-    renderProductos(); // Actualizar tabla
+    ProductoService.save(prods);
+    e.target.reset();
+    renderProductos();
 }
 
 // Función para eliminar
@@ -69,10 +101,11 @@ function eliminarProducto(i) {
         prods.splice(i, 1);
         ProductoService.save(prods);
         renderProductos();
+        mostrarMensaje("Producto eliminado correctamente", "danger");
     }
 }
 
-// Función para cargar datos en el formulario para editar
+// Función para preparar edición
 function prepararEdicion(i) {
     const p = ProductoService.get()[i];
     document.getElementById('nombre').value = p.nombre;

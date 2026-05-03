@@ -9,10 +9,10 @@ Sistema web desarrollado en **PHP (Arquitectura MVC)**.
 - **Seguridad**: validaciones en la entrada de datos.
 
 ## 🛠️ Tecnologías usadas
-- PHP 8.x
-- JavaScript 
-- CSS3 (Responsive Design)
-- Bootstrap 5
+- PHP 8.x : Estructura de controladores y lógica de servidor.
+- JavaScript (ES6+): Motor de persistencia (LocalStorage) y lógica de negocio.
+- CSS3 (Responsive Design): Estilos personalizados (Gradientes y efectos Glassmorphism).
+- Bootstrap 5: Framework de diseño responsivo.
 
 
 ## 📋 Requisitos de Instalación
@@ -24,7 +24,11 @@ Sistema web desarrollado en **PHP (Arquitectura MVC)**.
 
 3. Abrir el navegador y acceder mediante la URL: http://localhost/jorge_herrera_actividad2/
 
-Acceso libre. Las validaciones de stock y precio son estrictas.
+   Se debe Ingresar con los siguientes de datos de usuario de prueba:
+              usuario: admin
+              contraseña: 1234
+
+Al ingreasr nuevos Productos tomar encuenta las validaciones de stock y precio .
 
 ---
 **Jorge Herrera Galan** | ECOTEC 2026

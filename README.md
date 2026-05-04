@@ -30,7 +30,7 @@ Sistema web desarrollado en **PHP (Arquitectura MVC)**. Este es un Sistema Web d
               usuario: admin
               contraseña: 1234
 
-Al ingreasr nuevos Productos tomar encuenta las validaciones de stock y precio .
+
 
 ---
 **Jorge Herrera Galan** | ECOTEC 2026

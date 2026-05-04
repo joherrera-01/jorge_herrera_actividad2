@@ -10,8 +10,8 @@ Sistema web desarrollado en **PHP (Arquitectura MVC)**. Este es un Sistema Web d
 - **Almacenamiento**: Utilizacion de localstorage
 - **Seguridad**: validaciones en la entrada de datos.
 
-## 🛠️ Tecnologías usadas
-- PHP 8.x : Estructura de controladores y lógica de servidor.
+## 🛠️ Requisitos - Tecnologías usadas
+- XAMPP (PHP 8.x) : Estructura de controladores y lógica de servidor.
 - JavaScript (ES6+): Motor de persistencia (LocalStorage) y lógica de negocio.
 - CSS3 (Responsive Design): Estilos personalizados (Gradientes y efectos Glassmorphism).
 - Bootstrap 5: Framework de diseño responsivo.

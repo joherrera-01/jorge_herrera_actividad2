@@ -3,8 +3,10 @@ sistema ventas con localstorage
 # 🚀 Actividad Integradora 2 - JORGE HERRERA GALAN - ECOTEC
 
 ## 📖 Descripción del Sistema
-Sistema web desarrollado en **PHP (Arquitectura MVC)**.
+Sistema web desarrollado en **PHP (Arquitectura MVC)**. Este es un Sistema Web de Gestión de Productos y Ventas que permite el control de productos(crear,modificar,eliminar,listar) y tambien permite automatizar el registro de ventas.
 - **Módulos**: Gestión de Productos y Ventas.
+- Módulo de Inventario: Permite el registro, edición y control total de productos (Precios, Stock, Nombres).
+- Módulo de Ventas: Procesa salidas de mercancía, registra el historial y descuenta automáticamente el stock disponible.
 - **Almacenamiento**: Utilizacion de localstorage
 - **Seguridad**: validaciones en la entrada de datos.
 

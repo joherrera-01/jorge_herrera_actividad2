@@ -9,15 +9,15 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
     <div class="container">
-        <a class="navbar-brand" href="/jorge_herrera_actividad2/index.php">Sistema Inventario</a>
+        <a class="navbar-brand" href="menu.php">Sistema Inventario</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="productos.php">Productos</a></li>
                 <li class="nav-item"><a class="nav-link active" href="ventas.php">Ventas</a></li>
             </ul>
-            <a href="/jorge_herrera_actividad2/index.php" class="btn btn-outline-danger btn-sm">Salir al Menú</a>
+            <a href="menu.php" class="btn btn-outline-danger btn-sm">Volver al Menú</a>
         </div>
     </div>
 </nav>
@@ -49,7 +49,7 @@
 
     <h4><i class="bi bi-list-stars"></i> Historial de Transacciones</h4>
     <div class="table-responsive">
-        <table class="table table-hover bg-white mt-3">
+        <table class="table table-hover bg-white mt-3 shadow-sm">
             <thead class="table-dark">
                 <tr>
                     <th>Fecha</th>
@@ -63,11 +63,15 @@
     </div>
 </div>
 
+<div id="liveAlertPlaceholder" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11000"></div>
+
 <footer class="text-center py-4 mt-auto">
-    <p>&copy; 2026 Jorge Herrera - Todos los derechos reservados</p>
+    <p>&copy; 2026 Jorge Herrera - ECOTEC - Todos los derechos reservados</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/ventas.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         renderVentas();

@@ -8,12 +8,37 @@ const VentaService = {
     }
 };
 
+// Función para mostrar mensajes de retroalimentación
+function mostrarMensaje(mensaje, tipo = 'success') {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    if (!alertPlaceholder) return;
+
+    const wrapper = document.createElement('div');
+    const icono = tipo === 'success' ? 'bi-check-circle' : (tipo === 'danger' ? 'bi-trash' : 'bi-info-circle');
+
+    wrapper.innerHTML = [
+        `<div class="alert alert-${tipo} alert-dismissible fade show shadow-lg" role="alert" style="border-left: 5px solid;">`,
+        `   <div><i class="bi ${icono} me-2"></i>${mensaje}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('');
+
+    alertPlaceholder.append(wrapper);
+
+    setTimeout(() => {
+        const alertElement = wrapper.querySelector('.alert');
+        if (alertElement) {
+            const bsAlert = new bootstrap.Alert(alertElement);
+            bsAlert.close();
+        }
+    }, 3000);
+}
+
 // Función para renderizar tabla y select de productos
 function renderVentas() {
     const ventas = VentaService.getVentas();
     const prods = VentaService.getProds();
     
-    // Rellenar el Select de productos
     const select = document.getElementById('selectProd');
     if (select) {
         select.innerHTML = '<option value="">Seleccione un producto...</option>';
@@ -22,7 +47,6 @@ function renderVentas() {
         });
     }
 
-    // Rellenar la Tabla de historial
     const tbody = document.getElementById('tbodyVentas');
     if (tbody) {
         tbody.innerHTML = '';
@@ -33,10 +57,14 @@ function renderVentas() {
                     <td>${v.productoNom}</td>
                     <td>${v.cantidad}</td>
                     <td class="text-center">
-                        <button class="btn btn-info btn-sm text-white me-1" onclick="prepararEdicionVenta(${i})">
+                        <button class="btn btn-info btn-sm text-white me-1" 
+                                onclick="prepararEdicionVenta(${i})"
+                                data-tooltip="Editar Venta">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarVenta(${i})">
+                        <button class="btn btn-danger btn-sm" 
+                                onclick="eliminarVenta(${i})"
+                                data-tooltip="Anular Venta">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -61,13 +89,14 @@ function procesarVenta(e) {
     if (editIdx === "") {
         // --- NUEVA VENTA ---
         if (prods[pIdx].stock >= nuevaCant) {
-            prods[pIdx].stock -= nuevaCant; // Descontar stock
+            prods[pIdx].stock -= nuevaCant;
             ventas.push({
                 fecha: new Date().toLocaleString(),
                 productoNom: prods[pIdx].nombre,
                 productoIdx: pIdx,
                 cantidad: nuevaCant
             });
+            mostrarMensaje("¡Venta realizada con éxito!");
         } else {
             return alert("Stock insuficiente para realizar la venta.");
         }
@@ -76,22 +105,20 @@ function procesarVenta(e) {
         const vOriginal = ventas[editIdx];
         const pActual = prods[vOriginal.productoIdx];
 
-        // 1. Devolver stock anterior
         pActual.stock = parseInt(pActual.stock) + parseInt(vOriginal.cantidad);
 
-        // 2. Verificar si alcanza para la nueva cantidad
         if (pActual.stock >= nuevaCant) {
             pActual.stock -= nuevaCant;
             ventas[editIdx].cantidad = nuevaCant;
             ventas[editIdx].fecha = new Date().toLocaleString() + " (Modificado)";
             
-            // Resetear interfaz
             document.getElementById('editVentaIndex').value = "";
             document.getElementById('btnVenta').className = "btn btn-success w-100";
             document.getElementById('btnVenta').innerHTML = '<i class="bi bi-cart-plus"></i> Vender';
             document.getElementById('selectProd').disabled = false;
+            
+            mostrarMensaje("Registro de venta actualizado", "info");
         } else {
-            // Revertir el stock si no alcanza
             pActual.stock -= vOriginal.cantidad;
             return alert("No hay suficiente stock para ajustar a esa cantidad.");
         }
@@ -112,7 +139,6 @@ function prepararEdicionVenta(i) {
     btn.className = "btn btn-info text-white w-100";
     btn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Actualizar Venta';
     
-    // Bloqueamos el select para no cambiar el producto de una venta ya hecha (evita errores de stock)
     document.getElementById('selectProd').disabled = true;
 }
 
@@ -122,7 +148,6 @@ function eliminarVenta(i) {
         let prods = VentaService.getProds();
         const v = ventas[i];
 
-        // Devolver stock si el producto existe
         if (prods[v.productoIdx]) {
             prods[v.productoIdx].stock = parseInt(prods[v.productoIdx].stock) + parseInt(v.cantidad);
         }
@@ -130,27 +155,6 @@ function eliminarVenta(i) {
         ventas.splice(i, 1);
         VentaService.saveAll(ventas, prods);
         renderVentas();
+        mostrarMensaje("Venta anulada y stock devuelto", "danger");
     }
-}
-function mostrarMensaje(mensaje, tipo = 'success') {
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-    const wrapper = document.createElement('div');
-    
-    // Icono según el tipo
-    const icono = tipo === 'success' ? 'bi-check-circle' : (tipo === 'danger' ? 'bi-trash' : 'bi-info-circle');
-
-    wrapper.innerHTML = [
-        `<div class="alert alert-${tipo} alert-dismissible fade show shadow-lg" role="alert">`,
-        `   <div><i class="bi ${icono} me-2"></i>${mensaje}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        '</div>'
-    ].join('');
-
-    alertPlaceholder.append(wrapper);
-
-    // Auto-eliminar el mensaje después de 3 segundos
-    setTimeout(() => {
-        const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
-        alert.close();
-    }, 3000);
 }

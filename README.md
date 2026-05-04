@@ -17,7 +17,7 @@ Sistema web desarrollado en **PHP (Arquitectura MVC)**. Este es un Sistema Web d
 - Bootstrap 5: Framework de diseño responsivo.
 
 
-## 📋 Requisitos de Instalación
+## 📋 Pasos para la Instalación
 1. Descargar y descomprimir la carpeta jorge_herrera_actividad2 desde https://github.com/joherrera-01/jorge_herrera_actividad2
 
 2. Copiar el proyecto descargado dentro de C:\xampp\htdocs\
